@@ -31,7 +31,7 @@ user.set('fullName', 'Danny Tanner');
 user.get('fullName'); // => "John Stamos"
 ```
 
-This is where "setters" come in. Setters let us set a computed property and provide logic to handle manipulate or deal with the input.
+This is where "setters" come in. Setters let us set a computed property and provide logic to handle, manipulate, or deal with the input.
 
 Let's make a getter+setter (AKA "accessor") for our `fullName` property. This property handles both getting and setting.
 
@@ -128,7 +128,7 @@ And, that's all there is to know about getters and setters in Ember.js. Or, at l
 
 The above structure for a getter+setter property is standard and is the what's prescribed by the Ember.js documentation. However, it has a fatal flaw. The following example will demonstrate.
 
-What if the `firstName` property is also a getter+setter? Let's say, as a contrived example, that because of some arcane regulatory legislation we are not allowed by law to collect first names, only first initials. We might make our `firstName` property look like this:
+What if the `firstName` property is also a getter+setter? Let's say, as a contrived example, that because of some new regulatory legislation we are not legally allowed to collect first names, only first initials. We might make our `firstName` property look like this:
 
 ``` javascript
 firstName: function(key, firstNameStr) {
@@ -178,7 +178,7 @@ user.get('fullName');  // => 'John Stamos'
 
 Uh oh. Did you catch it? The `fullName` property should be returning `'J Stamos'`, not `'John Stamos'`.  The problems is that the `fullName` property assumed how the `firstName` property would handle its input.
 
-Instead, I advocate that each property mind it's own business. `fullName` should allow `firstName` to handle its own input (and caching).
+Instead, I advocate that each property mind its own business. `fullName` should allow `firstName` to handle its own input (and caching).
 
 ## A better way
 
@@ -199,12 +199,12 @@ fullName: function(key, fullNameString) {
 
 When the property is called as a getter (i.e. with one argument), it works the same way it always had.
 
-When the property is called setter, it sets the properties it needs to but doesn't just return `fullNameString` like the previous version did. Instead, it allows the getter logic to run which honor's `firstName`'s and `lastName`'s decisions about how they should handle being set.
+When the property is called setter, it sets the properties it needs to but doesn't just return `fullNameString` like the previous version did. Instead, it allows the getter logic to run, which honors `firstName`'s and `lastName`'s decisions about how they should handle being set.
 
 Not only is this version more correct, it is shorter and more DRY.
 
 ## Conclusion
 
-Getters and setters are an important part of data binding in Ember.js. Unfortunately,  they can be confusing if you haven't experimented a lot and read the source (which you shouldn't have to do).
+Getters and setters are an important part of data binding in Ember.js. Unfortunately,  they can be confusing if you haven't experimented a lot and read the source, which you shouldn't have to do.
 
-Ember.js is a young technology and for most of use presents a new paradigm.  If you have other insights, techniques, best practices, or critiques, I'd love to hear them.
+Ember.js is a young technology and presents a paradigm that's new for most of us.  If you have other insights, techniques, best practices, or critiques, I'd love to hear them.
