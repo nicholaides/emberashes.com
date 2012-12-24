@@ -6,6 +6,7 @@ date: 2012-12-23 20:21
 comments: true
 categories:
 - properties
+- best-practice
 ---
 
 Computed properties are the cornerstone of data binding in Ember.js. If you've written any code for Ember you've probably written your fair share of them. They tend to look something like this:
