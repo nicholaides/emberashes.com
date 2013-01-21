@@ -19,7 +19,7 @@ var User = Em.Object.extend({
 });
 ```
 
-The above property is a "getter". That is, it is limited to retrieving its value. If you try to set the `fullName` property it will be ignored. Observe:
+The preceding property is a "getter". That is, it can only retrieve a value. If you try to set the `fullName` property it will be ignored. Observe:
 
 ``` javascript
 var user = User.create({
@@ -84,7 +84,7 @@ this.get('firstName') + ' ' + this.get('lastName')
 
 Whatever we return here is what we get when we call `user.get('fullName')`.
 
-Also, just like normal computed properties, you'll notice that we need to keep this line, too:
+Just like normal computed properties, we need to keep this line, too:
 
 ``` javascript
 }.property('firstName', 'lastName')
@@ -115,7 +115,7 @@ this.set('firstName', nameParts[0]);
 this.set('lastName',  nameParts[1]);
 ```
 
-Finally, we return the value that should be cached as the `fullName` property's value:
+Finally, we return the value that we want to be cached as the `fullName` property's value:
 
 ``` javascript
 return fullNameString;
@@ -127,7 +127,7 @@ And, that's all there is to know about getters and setters in Ember.js. Or, at l
 
 ## ur doin it wrong
 
-The above structure for a getter+setter property is standard and is the what's prescribed by the Ember.js documentation. However, it has a fatal flaw. The following example will demonstrate.
+The above structure for a getter+setter property is standard and is what the Ember.js documentation prescribes. But, it has a fatal flaw as the following example will demonstrate.
 
 What if the `firstName` property is also a getter+setter? Let's say, as a contrived example, that because of some new regulatory legislation we are not legally allowed to collect first names, only first initials. We might make our `firstName` property look like this:
 
@@ -151,7 +151,7 @@ user.set('firstName', 'John');
 user.get('firstName'); // => 'J'
 ```
 
-Let's look at how the `fullName` property behaves when this change is introduced.
+Let's look at how the `fullName` property behaves when we introduce this change.
 
 This use case works fine:
 
@@ -177,7 +177,7 @@ user.get('lastName');  // => 'Stamos'
 user.get('fullName');  // => 'John Stamos'
 ```
 
-Uh oh. Did you catch it? The `fullName` property should be returning `'J Stamos'`, not `'John Stamos'`.  The problems is that the `fullName` property assumed how the `firstName` property would handle its input.
+Uh oh. Did you catch it? The `fullName` property should be returning `'J Stamos'`, not `'John Stamos'`.  The problem is that the `fullName` property assumed how the `firstName` property would handle its input.
 
 Instead, I advocate that each property mind its own business. `fullName` should allow `firstName` to handle its own input (and caching).
 
@@ -198,7 +198,7 @@ fullName: function(key, fullNameString) {
 }.property('firstName', 'lastName')
 ```
 
-When the property is called as a getter (i.e. with one argument), it works the same way it always had.
+When the property is called as a getter (i.e., with one argument), it works the same way it always had.
 
 When the property is called setter, it sets the properties it needs to but doesn't just return `fullNameString` like the previous version did. Instead, it allows the getter logic to run, which honors `firstName`'s and `lastName`'s decisions about how they should handle being set.
 
