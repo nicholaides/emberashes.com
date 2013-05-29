@@ -9,6 +9,13 @@ categories:
 - best-practice
 ---
 
+<div style="display:block; background-color:#fff">
+  <img src='http://emberjs.com/images/community/outdated.png' style="float:left;">
+  <p style="margin-left:115px; font-color:#1e1e1e;">
+    <em>Hey!</em> This article references a pre-release version of Ember.js. Now that Ember.js has reached a 1.0 API the code samples below are no longer correct and the expressed opinions <em>may</em> no longer be accurate.
+  </p>
+</div>
+
 Computed properties are the cornerstone of data binding in Ember.js. If you've written any code for Ember you've probably written your fair share of them. They tend to look something like this:
 
 ``` javascript
